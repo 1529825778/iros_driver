@@ -1,0 +1,23 @@
+path-constant OUT : out ;
+path-constant INCLUDE : include ;
+use-project /owlcpp : $(OWLCPP[1]) ;
+
+lib iconv :: <name>libiconv.a <search>/usr/lib <link>static ;
+lib glog  :: <name>libglog.so.1 <search>/usr/lib <link>shared ;
+
+project owl_test
+  : build-dir $(OUT)
+  : requirements
+     <include>$(INCLUDE)
+;
+exe test
+   : #sources
+        Data.cpp Interface.cpp Device.cpp Capbility.cpp Robot.cpp   parse_owl.cpp  iros_driver.cpp
+   : #requirements
+      <link>static
+      <library>/owlcpp//rdf 
+      <library>/owlcpp//io  
+      <library>iconv        
+    
+     
+;

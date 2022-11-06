@@ -1,0 +1,27 @@
+{
+    "name"        :"JV600",
+    "id"          :"1",
+    "ip"          :"192.168.0.0.10",
+    "send_port"   :"9999",
+    "recive_port" :"8888",
+    "device_list": [
+        {
+         "name"  :"Camera",
+         "id"    :"1",
+         "major" :"101",
+         "minor" :"1",
+         "type"  :"USB",
+         "pathname" : "/dev/usb",
+         "lib_path" : ""
+        },
+        {
+            "name"     :"Tempture_Sensor",
+            "id"       :"1",
+            "major"    :"101",
+            "minor"    :"2",
+            "type"     :"Serial",
+            "pathname" :"/dev/ttyUSB0",
+            "lib_path" :""
+        }
+    ] 
+}

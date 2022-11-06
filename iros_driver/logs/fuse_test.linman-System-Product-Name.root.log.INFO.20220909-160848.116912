@@ -1,0 +1,6 @@
+Log file created at: 2022/09/09 16:08:48
+Running on machine: linman-System-Product-Name
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I20220909 16:08:48.749747 116918 thread_pool.cpp:157] thread 140497431959104end working ...
+

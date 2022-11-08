@@ -1,0 +1,732 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/Capability#"
+     xml:base="http://www.semanticweb.org/Capability"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:Capability="http://www.semanticweb.org/Capability#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/Capability"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#contain -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/Capability#contain">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#has"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/Capability#Data"/>
+            </owl:Restriction>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#equipe -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/Capability#equipe">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#equipe"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/Capability#Unmaned_plateform"/>
+            </owl:Restriction>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#has -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/Capability#has">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#has"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/Capability#Payload_device"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#has"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/Capability#Unmaned_plateform"/>
+            </owl:Restriction>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#implementBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/Capability#implementBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Capability"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#transport -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/Capability#transport">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#transport"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/Capability#Interface"/>
+            </owl:Restriction>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#ip地址 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#ip地址">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#网口信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Eth"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#usb信息 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#usb信息">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#接口信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Usb"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#usb接口标识 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#usb接口标识">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#usb信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Usb"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#串口信息 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#串口信息">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#接口信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Serial"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#发送端口 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#发送端口">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#网口信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Eth"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#感知分辨率 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#感知分辨率">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#能力信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Capability"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#感知范围半径 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#感知范围半径">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#能力信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Capability"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#感知角度范围 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#感知角度范围">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#能力信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Capability"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#感知频率 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#感知频率">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#能力信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Capability"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#接口信息 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#接口信息">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#接口标识 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#接口标识">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#串口信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Serial"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#接收端口 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#接收端口">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#网口信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Eth"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#数据信息 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#数据信息">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Data"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#数据描述 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#数据描述">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#数据信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#数据格式 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#数据格式">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#数据信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#数据类型 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#数据类型">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#数据信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#数据长度 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#数据长度">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#数据信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#无人平台信息 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#无人平台信息">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Unmaned_plateform"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#无人平台厂商 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#无人平台厂商">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#无人平台信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Unmaned_plateform"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#无人平台名称 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#无人平台名称">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#无人平台信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Unmaned_plateform"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#无人平台标识 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#无人平台标识">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#无人平台信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Unmaned_plateform"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#无人平台类型 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#无人平台类型">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#无人平台信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Unmaned_plateform"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#波特率 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#波特率">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#串口信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Serial"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#编解码库 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#编解码库">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#数据信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#网口信息 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#网口信息">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#接口信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Eth"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#能力信息 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#能力信息">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Capability"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#能力名称 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#能力名称">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#能力信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Capability"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#能力标识 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#能力标识">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#能力信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Capability"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#载荷信息 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#载荷信息">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Payload_device"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#载荷厂家 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#载荷厂家">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#载荷信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Payload_device"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#载荷名称 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#载荷名称">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#载荷信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Payload_device"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#载荷标识 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#载荷标识">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#载荷信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Payload_device"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#载荷类型 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/Capability#载荷类型">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/Capability#载荷信息"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Payload_device"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#Capability -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/Capability#Capability">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#implementBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/Capability#Data"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#Data -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/Capability#Data"/>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#Eth -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/Capability#Eth">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/Capability#Interface"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#Interface -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/Capability#Interface">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#transport"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/Capability#Data"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#Payload_device -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/Capability#Payload_device">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#has"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/Capability#Capability"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#has"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/Capability#Interface"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#载荷厂家"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#载荷名称"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#载荷标识"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#载荷类型"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#Serial -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/Capability#Serial">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/Capability#Interface"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#Unmaned_plateform -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/Capability#Unmaned_plateform">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#equipe"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/Capability#Payload_device"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#has"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/Capability#Capability"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#has"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/Capability#Interface"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#无人平台厂商"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#无人平台名称"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#无人平台标识"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#无人平台类型"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#Usb -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/Capability#Usb">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/Capability#Interface"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#Eth_01 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/Capability#Eth_01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/Capability#Eth"/>
+        <ip地址>192.168.0.1</ip地址>
+        <发送端口 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6000</发送端口>
+        <接收端口 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7000</接收端口>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#KV600 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/Capability#KV600">
+        <rdf:type rdf:resource="http://www.semanticweb.org/Capability#Unmaned_plateform"/>
+        <equipe rdf:resource="http://www.semanticweb.org/Capability#Vlight_Camera"/>
+        <has rdf:resource="http://www.semanticweb.org/Capability#Eth_01"/>
+        <无人平台厂商>阿木</无人平台厂商>
+        <无人平台名称>kv600</无人平台名称>
+        <无人平台标识>kv600-01</无人平台标识>
+        <无人平台类型>无人机</无人平台类型>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#Usb_01 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/Capability#Usb_01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/Capability#Usb"/>
+        <has rdf:resource="http://www.semanticweb.org/Capability#vlight_data"/>
+        <接口标识>/dev/USB1</接口标识>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#Vlight_Camera -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/Capability#Vlight_Camera">
+        <rdf:type rdf:resource="http://www.semanticweb.org/Capability#Payload_device"/>
+        <has rdf:resource="http://www.semanticweb.org/Capability#Usb_01"/>
+        <has rdf:resource="http://www.semanticweb.org/Capability#Vlight_Perception"/>
+        <载荷厂家>logic</载荷厂家>
+        <载荷名称>logic_c270i</载荷名称>
+        <载荷标识>logic_c270i_01</载荷标识>
+        <载荷类型>单光摄像头</载荷类型>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#Vlight_Perception -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/Capability#Vlight_Perception">
+        <rdf:type rdf:resource="http://www.semanticweb.org/Capability#Capability"/>
+        <implementBy rdf:resource="http://www.semanticweb.org/Capability#vlight_data"/>
+        <感知分辨率>0.5mm</感知分辨率>
+        <感知范围半径>12m</感知范围半径>
+        <感知角度范围 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">180</感知角度范围>
+        <感知频率 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8000</感知频率>
+        <能力名称>可见光感知能力</能力名称>
+        <能力标识 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0001</能力标识>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/Capability#vlight_data -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/Capability#vlight_data">
+        <数据描述>可见光感知数据</数据描述>
+        <数据格式>RGB</数据格式>
+        <数据类型>视频数据</数据类型>
+        <数据长度 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</数据长度>
+        <编解码库>/usr/lib/libvlight_data_01.so</编解码库>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointProperties"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#contain"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#equipe"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#has"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#implementBy"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#transport"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointProperties"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#ip地址"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#发送端口"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#接收端口"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointProperties"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#usb信息"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#串口信息"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#网口信息"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointProperties"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#接口信息"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#数据信息"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#无人平台信息"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#能力信息"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#载荷信息"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointProperties"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#载荷厂家"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#载荷名称"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#载荷标识"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#载荷类型"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

@@ -1,11 +1,11 @@
 #include "Device.h"
 #include "Robot.h"
-PayLoad_Device::PayLoad_Device(string name,string id,string manufacture,string payload_type){
-    this->name = name;
-    this->id = id;
+PayLoad_Device::PayLoad_Device(Device_Info* device_info){
+    this->name = device_info->name;
+    this->id = device_info->id;
 
-    this->manufacture = manufacture;
-    this->type = payload_type;
+    this->manufacture = device_info->manufacture;
+    this->type = device_info->type;
 
 }
 
@@ -23,4 +23,10 @@ string PayLoad_Device::getManufacture(){
 string PayLoad_Device::getType(){
     return this->type;
 }
-/*生成设备唯一标识*/
+
+Robot* PayLoad_Device::getRobot(){
+    return this->robot;
+}
+void PayLoad_Device::setRobot(Robot* robot){
+    this->robot = robot;
+}

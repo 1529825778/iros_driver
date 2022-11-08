@@ -2,11 +2,11 @@
 
 
 
-Robot::Robot(Robot_Info robot_info){
-    this->name = robot_info.name;
-    this->id = robot_info.id;
-    this->manufacture= robot_info.manufacture;
-    this->type = robot_info.type;
+Robot::Robot(Robot_Info* robot_info){
+    this->name = robot_info->name;
+    this->id = robot_info->id;
+    this->manufacture= robot_info->manufacture;
+    this->type = robot_info->type;
                   
 }
 
@@ -24,6 +24,13 @@ string Robot::getManufacture(){
 
 string Robot::getType(){
     return this->type;
+}
+
+Interface* Robot::getInterface(){
+    return this->interface;
+}
+void Robot::setInterface(Interface* interface){
+    this->interface = interface;
 }
 
 

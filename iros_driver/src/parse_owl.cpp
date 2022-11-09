@@ -30,7 +30,10 @@ void parse_owl(string owl_file)
     Capbility_Info *capbility_info = new Capbility_Info;
     Device_Info *device_info = new Device_Info;
     Robot_Info *robot_info = new Robot_Info;
+    Data_Info* data_info = new Data_Info;
+    Interface_Info* interface_info = new Interface_Info;
     Robot *robot;
+    
     try
     {
         load_file(owl_file, store);
@@ -45,11 +48,11 @@ void parse_owl(string owl_file)
         << store.map_ns().size() << " namespace IRIs" << '\n'
         << std::endl;
 
-    owlcpp::Node_id Capbility_node, Device_node, Has_node, Equipe_node, Plateform_node;
+    owlcpp::Node_id Capbility_node, Device_node, Has_node, Equipe_node, Plateform_node,Transport_node;
 
-    owlcpp::Triple_store::query_b<0, 1, 1, 0>::range r = store.find_triple(owlcpp::any, owlcpp::terms::rdf_type::id(), owlcpp::terms::owl_Class::id(), owlcpp::any);
+    owlcpp::Triple_store::query_b<0, 1, 1, 0>::range r = store.find_triple(owlcpp::any, owlcpp::terms::rdf_type::id(), owlcpp::terms::owl_Class::id(),owlcpp::any);
     owlcpp::Triple_store::query_b<0, 1, 1, 0>::range r2, r5;
-    owlcpp::Triple_store::query_b<1, 0, 0, 0>::range r3;
+    owlcpp::Triple_store::query_b<1, 0, 0, 0>::range r3,r7;
     owlcpp::Triple_store::query_b<1, 1, 0, 0>::range r4;
     owlcpp::Triple_store::query_b<0, 0, 1, 0>::range r6;
 
@@ -72,6 +75,9 @@ void parse_owl(string owl_file)
             Has_node = t.subj_;
         if (get_string(t.subj_, store).compare("equipe") == 0)
             Equipe_node = t.subj_;
+        if(get_string(t.subj_,store).compare("transport")==0)
+            Transport_node = t.subj_;
+        
     }
 
     /*遍历获取无人平台信息*/
@@ -98,6 +104,7 @@ void parse_owl(string owl_file)
             {
                 robot_info->type = to_string(o.obj_, store);
             }
+
         }
         robot = new Robot(robot_info);
     }
@@ -140,6 +147,7 @@ void parse_owl(string owl_file)
 
     BOOST_FOREACH (owlcpp::Triple const &t, r2)
     {
+        Data* data = new Data();
 
         r3 = store.find_triple(t.subj_, owlcpp::any, owlcpp::any, owlcpp::any);
         BOOST_FOREACH (owlcpp::Triple const &n, r3)
@@ -171,6 +179,57 @@ void parse_owl(string owl_file)
             {
                 capbility_info->capbility_id = to_string(n.obj_, store);
             }
+            if (get_string(n.pred_,store).compare(IMPLEMENTBY)==0){
+
+                
+                r3 = store.find_triple(n.obj_,owlcpp::any,owlcpp::any,owlcpp::any);
+                BOOST_FOREACH(owlcpp::Triple const &m,r3){
+                    if(get_string(m.pred_,store).compare(DATA_DESCRIBTION)==0){
+                        data_info->data_describe = get_string(m.obj_,store);
+                    }
+                    if(get_string(m.pred_,store).compare(DATA_FORMATE)==0){
+                        data_info->data_formate = get_string(m.obj_,store);
+                    }
+                    if(get_string(m.pred_,store).compare(DATA_LENGTH)==0){
+                        data_info->data_length = atoi(get_string(m.obj_,store).c_str());
+                    }
+                    if(get_string(m.pred_,store).compare(DATA_HANDLE_LIB)==0){
+                        data_info->data_handle_lib = get_string(m.obj_,store);
+                    }
+                    if(get_string(m.pred_,store).compare(DATA_TYPE)==0){
+                        data_info->data_type = get_string(m.obj_,store);
+                    }
+                    if(get_string(m.pred_,store).compare(TRANSPORTBY)==0){
+
+                        Interface* interface = new Interface();
+                        r4 = store.find_triple(m.obj_,owlcpp::terms::rdf_type::id(),owlcpp::any,owlcpp::any);
+                        BOOST_FOREACH(owlcpp::Triple const&o,r4){
+                            if(get_string(o.obj_,store).compare(ETH)) interface->setType(ETH);
+                            if(get_string(o.obj_,store).compare(USB)) interface->setType(USB);
+                            if(get_string(o.obj_,store).compare(SERIALPORT)) interface->setType(SERIALPORT);
+                        }
+                        r7 = store.find_triple(m.obj_,owlcpp::any,owlcpp::any,owlcpp::any);
+                        BOOST_FOREACH(owlcpp::Triple const&o,r4){
+                            if(interface->get_type().compare(ETH)){
+                                if(get_string(o.obj_,store).compare(IP)==0) interface->getPort()->eth.ip=get_string(o.obj_,store);
+                                if(get_string(o.obj_,store).compare(SEND_PORT)) interface->getPort()->eth.send_port = atoi(get_string(o.obj_,store).c_str());
+                                if(get_string(o.obj_,store).compare(RECV_PORT)) interface->getPort()->eth.receive_port = atoi(get_string(o.obj_,store).c_str());
+                            }
+                            if(interface->get_type().compare(USB)){
+                                if(get_string(o.obj_,store).compare(USB_PATH)==0) interface->getPort()->usb.name=get_string(o.obj_,store);
+                            }
+                            if(interface->get_type().compare(SERIALPORT)==0){
+                                if(get_string(o.obj_,store).compare(SERIAL_PATH)==0) interface->getPort()->serial_port.name=get_string(o.obj_,store);
+                                if(get_string(o.obj_,store).compare(BAUD_RATE)==0) interface->getPort()->serial_port.Baud_Rate = atoi(get_string(o.obj_,store).c_str());
+                            }
+                        }
+                        data->setInterface(interface);
+                        
+
+
+                    }
+                }
+            }
         }
 
         r5 = store.find_triple(owlcpp::any,Has_node,t.subj_,owlcpp::any);
@@ -184,8 +243,54 @@ void parse_owl(string owl_file)
 
         }
         Capbility* ca = new Capbility(capbility_info);
+        
         ca->setDevice((*(device_mng->getDeviceMap()))[name+id]);
+        ca->setData(data);
 
         driver_mng->getCapbilityMap()->emplace(capbility_info->capbility_name + capbility_info->capbility_id, new Capbility(capbility_info));
     }
+
+        for(auto it : *(driver_mng->getCapbilityMap())){
+            // cout<<"机器人信息:\n"<<std::endl;
+            // cout<<it.second->getRobot()->getManufacture();
+            // cout<<it.second->getRobot()->getName();
+            // cout<<it.second->getRobot()->getId();
+            // cout<<it.second->getRobot()->getType();
+            // cout<<it.second->getRobot()->getName();
+            // cout<<it.second->getRobot()->getInterface()->getPort()->eth.ip;
+            // cout<<"载荷信息:\n"<<std::endl;
+            // cout<<it.second->getDevice()->getManufacture();
+            // cout<<it.second->getDevice()->getName();
+            // cout<<it.second->getDevice()->getId();
+            // cout<<it.second->getDevice()->getType();
+            cout<<"能力信息:\n"<<std::endl;
+            cout<<it.second->getName();
+            cout<<it.second->getId();
+            cout<<it.second->getAngle();
+            cout<<it.second->getFrequency();
+            cout<<it.second->getRadious();
+            cout<<it.second->getResoluion();
+            cout<<"数据信息:\n"<<std::endl;
+            cout<<it.second->getData()->getDescribe();
+            cout<<it.second->getData()->getFormate();
+            cout<<it.second->getData()->getLength();
+            cout<<it.second->getData()->getLib();
+            cout<<it.second->getData()->getType();
+            cout<<"接口信息:\n"<<std::endl;
+            string type = it.second->getData()->getInterface()->get_type();
+            
+            if(type.compare(ETH)==0){
+                cout<<"ip:"<<it.second->getData()->getInterface()->getPort()->eth.ip;
+                cout<<"recv_port:"<<it.second->getData()->getInterface()->getPort()->eth.receive_port;
+                cout<<"send_port:"<<it.second->getData()->getInterface()->getPort()->eth.send_port;
+            }
+            if(type.compare(USB)==0){
+                cout<<"name:"<<it.second->getData()->getInterface()->getPort()->usb.name;
+            }
+            if(type.compare(SERIALPORT)==0){
+                cout<<"name:"<<it.second->getData()->getInterface()->getPort()->serial_port.name;
+                cout<<"Baud_Rate:"<<it.second->getData()->getInterface()->getPort()->serial_port.Baud_Rate;
+            }
+
+        }
 }

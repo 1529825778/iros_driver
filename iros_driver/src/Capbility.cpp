@@ -34,17 +34,21 @@ string Capbility::getRadious(){
 string Capbility::getAngle(){
     return this->angle;
 }
-Robot Capbility::getRobot(){
+
+string Capbility::getFrequency(){
+    return this->frequency;
+}
+Robot* Capbility::getRobot(){
     return this->robot;
     
 }
-void Capbility::setRobot(Robot robot){
+void Capbility::setRobot(Robot* robot){
     this->robot = robot;
 }
-Data Capbility::getData(){
+Data* Capbility::getData(){
     return this->data;
 }
-void Capbility::setData(Data data){
+void Capbility::setData(Data* data){
     this->data = data;
 }
 PayLoad_Device* Capbility::getDevice(){

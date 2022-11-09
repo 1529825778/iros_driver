@@ -3,22 +3,22 @@
 #include <string>
 using namespace std;
 
-struct Serial_port{
-    string name;
-    int baudRate;
-
-};
 
  struct Eth{
     string name;
     string ip;
     int send_port;
-    int receive_portl;
+    int receive_port;
 
 };
 
 struct Usb{
     string name;
+};
+
+struct Serial_port{
+    string name;
+    int Baud_Rate;
 };
 
 typedef union Port{
@@ -29,22 +29,21 @@ typedef union Port{
 }Port;
 
 struct Interface_Info{
-    string interface_name;
     string interface_type;
 };
 
 class Interface{
     private:
-        string interface_name;
         string interface_type;
         Port* port;
     public:
-        Interface(){};
-        Interface(Interface_Info interface_info);
+        Interface();
+        Interface(string interface_type);
         ~Interface(){};
         string getName();
         string get_type();
         void setPort(Port*);
+        void setType(string interface_type);
         Port* getPort();
 
 };

@@ -25,9 +25,9 @@ class Capbility{
         string radious;
         string angle;
         string frequency;
-        Robot robot;
+        Robot* robot;
         PayLoad_Device* payload_device;
-        Data data;
+        Data* data;
 
 
         
@@ -40,12 +40,12 @@ class Capbility{
         string getRadious();
         string getAngle();
         string getFrequency();
-        Robot getRobot();
-        void setRobot(Robot robot);
+        Robot* getRobot();
+        void setRobot(Robot* robot);
         PayLoad_Device* getDevice();
         void setDevice(PayLoad_Device* device);
-        Data getData();
-        void setData(Data data);
+        Data* getData();
+        void setData(Data* data);
         
                    
 

@@ -8,30 +8,34 @@ struct Data_Info{
     int data_length;
     string data_type;
     string data_handle_lib;
+    string data_formate;
     string data_describe;
 };
 
 class Data{
     private:
-        string data_length;
+        int data_length;
         string data_type;
         string data_describe;
         string data_handle_lib;
-        Interface interface;
+        string data_formate;
+        Interface* interface;
         map<string,string> paramter_map;
     public:
         Data(){};
-        Data(Data_Info);
+        Data(Data_Info*);
         ~Data(){};
 
         int getLength();
         string getType();
         string getDescribe();
         string getLib();
-        Interface getInterface();
-        void setInterface(Interface);
+        string getFormate();
+        Interface* getInterface();
+        void setInterface(Interface*);
         map<string,string> getParamter();
         void setParamter(map<string,string>);
+        void setInfo(Data_Info*);
   
      
 

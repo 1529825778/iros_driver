@@ -5,19 +5,19 @@ using namespace std;
 
 
  struct Eth{
-    string name;
-    string ip;
+    char name[10];
+    char ip[20];
     int send_port;
     int receive_port;
 
 };
 
 struct Usb{
-    string name;
+    char name[10];
 };
 
 struct Serial_port{
-    string name;
+    char name[10];
     int Baud_Rate;
 };
 

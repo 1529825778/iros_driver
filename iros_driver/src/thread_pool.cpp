@@ -1,6 +1,6 @@
 
 #include "thread_pool.h"
-
+/*线程池*/ 
  Threadpool::Threadpool(int min,int max,int queueSize){
 
         this->threadIDs = new pthread_t[max];
@@ -182,6 +182,7 @@ void* Threadpool::manager(void* arg){
         int queueSize = pool->queueSize;
         int liveNum = pool->liveNum;
         int busyNum = pool->busyNum;
+        pthread_mutex_unlock(&pool->mutexPool);
         LOG(INFO)<<"LiveNum="<<liveNum<<","<<"BusyNum="<<busyNum<<std::endl;
 
         //添加线程

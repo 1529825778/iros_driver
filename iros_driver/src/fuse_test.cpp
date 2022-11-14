@@ -1,7 +1,7 @@
 
 #define FUSE_USE_VERSION 31
-#include<cuse_lowlevel.h>
-#include<fuse_opt.h>
+#include "cuse_lowlevel.h"
+#include "fuse_opt.h"
 #include<stddef.h>
 #include<stdio.h>
 #include<stdlib.h>
@@ -19,25 +19,23 @@ typedef struct Device{
 }Device;
 
 
-static void dev_open(fuse_req_t req,struct fuse_file_info *fi){
+void dev_open(fuse_req_t req,struct fuse_file_info *fi){
     fuse_reply_open(req,fi);
 }
+ void dev_read(fuse_req_t req,size_t size,off_t off,struct fuse_file_info *fi){
 
-static void dev_read(fuse_req_t req,size_t size,off_t off,struct fuse_file_info *fi){
     
 
 } 
 
-static void dev_write(fuse_req_t req,const char* buf,size_t size,off_t off,struct fuse_file_info *fi){
+ void dev_write(fuse_req_t req,const char* buf,size_t size,off_t off,struct fuse_file_info *fi){
+
+}
+ void dev_ioctl(fuse_req_t req,int cmd,void *arg,struct fuse_file_info *fi,unsigned flags,const void *in_buf,size_t in_bufsz,size_t out_bufsz){
 
 }
 
-
-static void dev_ioctl(fuse_req_t req,int cmd,void *arg,struct fuse_file_info *fi,unsigned flags,const void *in_buf,size_t in_bufsz,size_t out_bufsz){
-
-}
-
-static const struct cuse_lowlevel_ops dev_clop={
+const struct cuse_lowlevel_ops dev_clop={
     .open = dev_open,
     .read = dev_read,
     .write = dev_write,

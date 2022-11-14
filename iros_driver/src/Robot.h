@@ -11,6 +11,9 @@ typedef struct Robot_Info {
     string id;
     string manufacture;
     string type;
+    string multicast_ip;
+    int multicast_port;
+    string eth_name;
 }Robot_Info;
 
 class Robot{
@@ -20,8 +23,11 @@ class Robot{
         string manufacture;
         string type;
         Interface* interface;
+        string multicast_ip;
+        int multicast_port;
+        string eth_name;
     public:
-        Robot(){};
+        Robot();
         ~Robot(){};
         Robot(Robot_Info*);
        
@@ -29,8 +35,12 @@ class Robot{
         string getId();
         string getManufacture();
         string getType();
+        string getMulticast_ip();
+        string getEth_name();
+        int getMulticast_port();
         Interface* getInterface();
         void setInterface(Interface* interface);
+        void setInfo(Robot_Info*);
                        
 
 };

@@ -13,7 +13,7 @@
 #define CUSE_LOWLEVEL_H_
 
 #ifndef FUSE_USE_VERSION
-#define FUSE_USE_VERSION 29
+#define FUSE_USE_VERSION 31
 #endif
 
 #include "fuse_lowlevel.h"

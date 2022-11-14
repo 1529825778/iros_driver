@@ -1,9 +1,11 @@
 #include "Capbility.h"
 Capbility::Capbility(Capbility_Info* capbility_info){
+    this->resolution = capbility_info->resoultion;
     this->angle = capbility_info->angle;
     this->capbility_name = capbility_info->capbility_name;
     this->radious = capbility_info->radious;
     this->capbility_id = capbility_info->capbility_id;
+    this->frequency = capbility_info->frequency;
 }
 
  string getName();

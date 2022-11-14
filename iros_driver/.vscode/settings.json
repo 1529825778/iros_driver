@@ -69,6 +69,11 @@
         "thread": "cpp",
         "cfenv": "cpp",
         "cinttypes": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "fuse_lowlevel.h": "c",
+        "codecvt": "cpp",
+        "csignal": "cpp",
+        "future": "cpp",
+        "*.ipp": "cpp"
     }
 }

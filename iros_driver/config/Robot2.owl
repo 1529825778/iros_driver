@@ -79,17 +79,19 @@
     
 
 
-    <!-- http://www.semanticweb.org/Capability#transport -->
+    <!-- http://www.semanticweb.org/Capability#transportBy -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/Capability#transport">
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/Capability#transportBy">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:domain>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#transport"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/Capability#Interface"/>
-            </owl:Restriction>
-        </rdfs:domain>
     </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
+
+    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#topObjectProperty">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/Capability#Data"/>
+    </rdf:Description>
     
 
 
@@ -451,7 +453,14 @@
 
     <!-- http://www.semanticweb.org/Capability#Data -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/Capability#Data"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/Capability#Data">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#transportBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/Capability#Interface"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
     
 
 
@@ -465,14 +474,7 @@
 
     <!-- http://www.semanticweb.org/Capability#Interface -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/Capability#Interface">
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/Capability#transport"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/Capability#Data"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
+    <owl:Class rdf:about="http://www.semanticweb.org/Capability#Interface"/>
     
 
 
@@ -614,7 +616,7 @@
         <has rdf:resource="http://www.semanticweb.org/Capability#Eth_01"/>
         <无人平台厂商>阿木</无人平台厂商>
         <无人平台名称>kv600</无人平台名称>
-        <无人平台标识>kv600-01</无人平台标识>
+        <无人平台标识 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">01</无人平台标识>
         <无人平台类型>无人机</无人平台类型>
     </owl:NamedIndividual>
     
@@ -624,8 +626,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/Capability#Usb_01">
         <rdf:type rdf:resource="http://www.semanticweb.org/Capability#Usb"/>
-        <has rdf:resource="http://www.semanticweb.org/Capability#vlight_data"/>
-        <接口标识>/dev/USB1</接口标识>
+        <usb接口标识>/dev/USB0</usb接口标识>
     </owl:NamedIndividual>
     
 
@@ -653,7 +654,7 @@
         <感知范围半径>12m</感知范围半径>
         <感知角度范围 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">180</感知角度范围>
         <感知频率 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8000</感知频率>
-        <能力名称>可见光感知能力</能力名称>
+        <能力名称>Vlight_Perception</能力名称>
         <能力标识 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0001</能力标识>
     </owl:NamedIndividual>
     
@@ -662,6 +663,8 @@
     <!-- http://www.semanticweb.org/Capability#vlight_data -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/Capability#vlight_data">
+        <rdf:type rdf:resource="http://www.semanticweb.org/Capability#Data"/>
+        <transportBy rdf:resource="http://www.semanticweb.org/Capability#Usb_01"/>
         <数据描述>可见光感知数据</数据描述>
         <数据格式>RGB</数据格式>
         <数据类型>视频数据</数据类型>
@@ -686,7 +689,7 @@
             <rdf:Description rdf:about="http://www.semanticweb.org/Capability#equipe"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/Capability#has"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/Capability#implementBy"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#transport"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/Capability#transportBy"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>

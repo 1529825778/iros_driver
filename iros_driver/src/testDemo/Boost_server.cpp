@@ -7,6 +7,7 @@
 
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+using boost::asio::ip::udp;
 
 using namespace std;
 
@@ -59,7 +60,9 @@ class A{
 
 
     public:
-        A(){}
+        A(){
+            b=new B();
+        }
         A(string name,string id,B* b){
             this->name = name;
             this->id = id;
@@ -82,37 +85,46 @@ class Asio_Serve
     private:
         boost::asio::ip::udp::socket socket_;
         boost::asio::ip::udp::endpoint local_endpoint_;
-        std::stringstream receive_stream;
+         boost::asio::ip::udp::endpoint sender_end_point;
+        boost::asio::streambuf receive_stream;
         boost::asio::deadline_timer timer_;
+        char data[1024];
         
         void do_receive(){
-            boost::asio::ip::udp::endpoint sender_end_point;
-                while(true){
-                socket_.async_receive_from(boost::asio::buffer(receive_stream.str()),sender_end_point,boost::bind(&handler_receive,this,receive_stream.str(),boost::asio::placeholders::error,boost::asio::placeholders::bytes_transferred));
-                }
+           
+            socket_.async_receive_from(receive_stream.prepare(100),sender_end_point,boost::bind(&Asio_Serve::handler_receive,this,boost::asio::placeholders::error,boost::asio::placeholders::bytes_transferred));
+                
         }
-        void do_send(boost::asio::ip::udp::endpoint endpoint_){
-            B b("b","b1");
-            A a("a","A1",&b);
-            stringstream ss("");
-            boost::archive::binary_oarchive oa(ss);
-            oa << a;
+        // void do_send(boost::asio::ip::udp::endpoint endpoint_){
+        //     B b("b","b1");
+        //     A a("a","A1",&b);
+        //     stringstream ss("");
+        //     boost::archive::binary_oarchive oa(ss);
+        //     oa << a;
 
-            socket_.send_to(boost::asio::buffer(ss.str(),ss.str().length()),endpoint_);
-        }
+        //     socket_.send_to(boost::asio::buffer(ss.str(),ss.str().length()),endpoint_);
+        // }
            
 
-    void handler_receive(string receive,const boost::system::error_code& error,std::size_t){
-        if(!error || error==boost::asio::error::message_size){
-            stringstream ss(receive);
+    void handler_receive(const boost::system::error_code& error,std::size_t size){
+           
+        if(!error && size>0){
+            cout<<"size:"<<size<<std::endl;
+            receive_stream.commit(size);
+            boost::archive::binary_iarchive ia(receive_stream);
+            cout<<"size:"<<size<<std::endl;
             A a;
-            boost::archive::binary_iarchive ia(ss);
+            cout<<"size:"<<size<<std::endl;
             ia >> a;
-            
+            cout<<"size:"<<size<<std::endl;
             cout << a.getName()<<"\n";
             cout << a.getId()<<"\n";
             cout << a.getB()->getName()<<"\n";
             cout << a.getB()->getId()<<"\n";
+            do_receive();
+            
+            
+           
 
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
@@ -125,7 +137,7 @@ class Asio_Serve
             socket_.open(local_endpoint_.protocol());
             socket_.set_option(boost::asio::ip::udp::socket::reuse_address(true));
             socket_.bind(local_endpoint_);
-            socket_.set_option(boost::asio::ip::multicast::join_group(boost::asio::ip::address_v4::from_string(c_multicast_addr),boost::asio::ip::address_v4::from_string(c_listen_addr)));
+            socket_.set_option(boost::asio::ip::multicast::join_group(boost::asio::ip::address_v4::from_string(c_multicast_addr)));
             socket_.set_option(boost::asio::ip::multicast::enable_loopback(true));
             do_receive();
             
@@ -142,4 +154,72 @@ int main(){
     
 
 }
+
+// class server
+// {
+// public:
+//   server(boost::asio::io_service& io_service, short port)
+//     : socket_(io_service, udp::endpoint(udp::v4(), port))
+//   {
+//     do_receive();
+//   }
+
+//   void do_receive()
+//   {
+//     socket_.async_receive_from(
+//         boost::asio::buffer(data_, max_length), sender_endpoint_,
+//         [this](boost::system::error_code ec, std::size_t bytes_recvd)
+//         {
+//           if (!ec && bytes_recvd > 0)
+//           {
+//             cout<<"123\n"<<std::endl;
+//             do_send(bytes_recvd);
+//           }
+//           else
+//           {
+//             do_receive();
+//           }
+//         });
+//   }
+
+//   void do_send(std::size_t length)
+//   {
+//     socket_.async_send_to(
+//         boost::asio::buffer(data_, length), sender_endpoint_,
+//         [this](boost::system::error_code /*ec*/, std::size_t /*bytes_sent*/)
+//         {
+//           do_receive();
+//         });
+//   }
+
+// private:
+//   udp::socket socket_;
+//   udp::endpoint sender_endpoint_;
+//   enum { max_length = 1024 };
+//   char data_[max_length];
+// };
+
+// int main(int argc, char* argv[])
+// {
+//   try
+//   {
+//     if (argc != 2)
+//     {
+//       std::cerr << "Usage: async_udp_echo_server <port>\n";
+//       return 1;
+//     }
+
+//     boost::asio::io_service io_service;
+
+//     server s(io_service, std::atoi(argv[1]));
+
+//     io_service.run();
+//   }
+//   catch (std::exception& e)
+//   {
+//     std::cerr << "Exception: " << e.what() << "\n";
+//   }
+
+//   return 0;
+// }
     

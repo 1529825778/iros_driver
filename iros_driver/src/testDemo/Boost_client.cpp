@@ -80,56 +80,54 @@ class Asio_Client
         boost::asio::ip::udp::endpoint dest_endpoint_;
         boost::asio::streambuf recv_buff;
         boost::asio::deadline_timer timer_;
-        
-        void do_receive(){
-            boost::asio::ip::udp::endpoint sender_end_point;
-                while(true){
-                socket_.async_receive_from(recv_buff,sender_end_point,boost::bind(&Asio_Client::handler_receive,this,boost::asio::placeholders::error,boost::asio::placeholders::bytes_transferred));
-                }
-        }
-        void do_send(){
-            // B b("b","b1");
-            // A a("a","A1",&b);
-            // boost::asio::streambuf buff;
-
-            // boost::archive::binary_oarchive oa(buff);
-            // oa << a;
-
-            // socket_.send_to(buff,dest_endpoint_);
-        }
+    
+       
            
 
-    void handler_receive(const boost::system::error_code& error,std::size_t){
-        if(!error || error==boost::asio::error::message_size){
-            // A a;
-            // boost::archive::binary_iarchive ia(recv_buff);
-            // ia >> a;
+    // void handler_receive(const boost::system::error_code& error,std::size_t){
+    //     if(!error || error==boost::asio::error::message_size){
+    //         // A a;
+    //         // boost::archive::binary_iarchive ia(recv_buff);
+    //         // ia >> a;
             
-            // cout << a.getName()<<"\n";
-            // cout << a.getId()<<"\n";
-            // cout << a.getB()->getName()<<"\n";
-            // cout << a.getB()->getId()<<"\n";
+    //         // cout << a.getName()<<"\n";
+    //         // cout << a.getId()<<"\n";
+    //         // cout << a.getB()->getName()<<"\n";
+    //         // cout << a.getB()->getId()<<"\n";
 
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 
 
-        }
-    }
+    //     }
+    // }
     public:
-        Asio_Client(boost::asio::io_service &io_service):socket_(io_service),timer_(io_service),dest_endpoint_(boost::asio::ip::address::from_string("127.0.0.1"),c_multicast_port){
-            do_send();
-            
+        Asio_Client(boost::asio::io_service &io_service,string ip,int port):socket_(io_service),timer_(io_service),dest_endpoint_(boost::asio::ip::address::from_string(ip),port){
+            socket_.open(dest_endpoint_.protocol());
         }
         ~Asio_Client(){
             socket_.close();
+        }
+        void do_send(){
+            cout<<"123e\n"<<std::endl;
+            B b("b","b1");
+            A a("a","A1",&b);
+            boost::asio::streambuf buff;
+             cout<<"123e\n"<<std::endl;
+            boost::archive::binary_oarchive oa(buff);
+            oa << a;
+            for(int i=0;i<1;i++){
+            int ret = socket_.send_to(buff.data(),dest_endpoint_);
+            cout<<"ret:"<<ret<<std::endl;
+            }
+
         }
 };
 
 int main(){
     boost::asio::io_service io_service;
-    Asio_Client client(io_service);
-    io_service.run();
+    Asio_Client client(io_service,"127.0.0.1",30001);
+    client.do_send();
     
 
 }

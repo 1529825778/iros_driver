@@ -27,11 +27,24 @@ class PayLoad_Device{
         
         
      private:
+        friend class boost::serialization::access;
+        template<class Archive>
+        void serialize(Archive & ar,const unsigned int version){
+            ar & name;
+            ar & id;
+            ar & manufacture;
+            ar & type;
+            ar & robot;
+        };
         string name;
         string id;
         string manufacture;
         string type;  
-        Robot* robot;  
+        Robot* robot;
+
+        
+
+         
 
 
 };

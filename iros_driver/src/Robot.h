@@ -4,6 +4,9 @@
 #include<string>
 #include"Interface.h"
 
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+
 using namespace std;
 
 typedef struct Robot_Info {
@@ -18,14 +21,29 @@ typedef struct Robot_Info {
 
 class Robot{
     private:
+
+        friend class boost::serialization::access;
+        template<class Archive>
+        void serialize(Archive & ar,const unsigned int version){
+            ar & name;
+            ar & id;
+            ar & manufacture;
+            ar & type;
+            ar & multicast_ip;
+            ar & multicast_port;
+            ar & eth_name;
+            ar & interface;
+        };
         string name;
         string id;
         string manufacture;
         string type;
-        Interface* interface;
         string multicast_ip;
         int multicast_port;
         string eth_name;
+        Interface* interface;
+        
+        
     public:
         Robot();
         ~Robot(){};

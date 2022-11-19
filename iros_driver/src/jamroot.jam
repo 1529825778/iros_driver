@@ -2,24 +2,33 @@ path-constant OUT : out ;
 path-constant INCLUDE : ../include ;
 use-project /owlcpp : $(OWLCPP[1]) ;
 
-lib iconv :: <name>libiconv.a <search>/usr/lib <link>static ;
-lib glog  :: <name>libglog.a <search>/usr/lib <link>static ;
-lib fuse3  :: <name>libfuse3.a <search>/usr/lib <link>static ;
-project iros_driver
+lib iconv
+  :
+  : <name>iconv <search>/usr/lib ;
+lib glog
+  :
+  :  <name>glog <search>/usr/lib ;
+lib fuse3 
+  :
+  : <name>fuse3 <search>/usr/lib ;
+
+lib boost_serialization
+  :
+  : <name>boost_serialization <search>/usr/local/lib ;
+project iros_driver 
   : build-dir $(OUT)
   : requirements
      <include>$(INCLUDE)
 ;
 exe iros_driver
    : #sources
-        Data.cpp Interface.cpp Device.cpp Capbility.cpp Robot.cpp  thread_pool.cpp   parse_owl.cpp  iros_driver.cpp
+      Data.cpp Interface.cpp Device.cpp Capbility.cpp Robot.cpp thread_pool.cpp parse_owl.cpp  iros_driver.cpp Asio_client.cpp 
    : #requirements
       <link>static
       <library>/owlcpp//rdf 
       <library>/owlcpp//io  
       <library>iconv
       <library>glog
-      <library>fuse3    
-    
-     
+      <library>fuse3 
+      <library>boost_serialization       
 ;

@@ -5,6 +5,8 @@
 #include"Data.h"
 #include"Robot.h"
 #include"Device.h"
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
 
 
 using namespace std;
@@ -19,19 +21,36 @@ struct Capbility_Info{
 };
 class Capbility{
     private:
+     
+        friend class boost::serialization::access;
+        template<class Archive>
+        void serialize(Archive & ar,const unsigned int version){
+            ar & capbility_name;
+            ar & capbility_id;
+            ar & resolution;
+            ar & radious;
+            ar & angle;
+            ar & frequency;
+            ar & payload_device;
+            ar & data;
+                
+        };
         string capbility_name;
         string capbility_id;
         string resolution;
         string radious;
         string angle;
         string frequency;
-        Robot* robot;
+       
         PayLoad_Device* payload_device;
         Data* data;
+       
+        
 
 
         
     public:
+        Capbility(){};
         Capbility(Capbility_Info* capbility_info);
         ~Capbility();
         string getName();
@@ -40,8 +59,6 @@ class Capbility{
         string getRadious();
         string getAngle();
         string getFrequency();
-        Robot* getRobot();
-        void setRobot(Robot* robot);
         PayLoad_Device* getDevice();
         void setDevice(PayLoad_Device* device);
         Data* getData();

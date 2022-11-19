@@ -6,6 +6,16 @@ Capbility::Capbility(Capbility_Info* capbility_info){
     this->radious = capbility_info->radious;
     this->capbility_id = capbility_info->capbility_id;
     this->frequency = capbility_info->frequency;
+    // this->robot = new Robot();
+    // this->payload_device = new PayLoad_Device();
+    // this->data = new Data();
+
+}
+
+Capbility::~Capbility(){
+    // delete this->robot;
+    // delete this->data;
+    // delete this->payload_device;
 }
 
  string getName();
@@ -39,13 +49,6 @@ string Capbility::getAngle(){
 
 string Capbility::getFrequency(){
     return this->frequency;
-}
-Robot* Capbility::getRobot(){
-    return this->robot;
-    
-}
-void Capbility::setRobot(Robot* robot){
-    this->robot = robot;
 }
 Data* Capbility::getData(){
     return this->data;

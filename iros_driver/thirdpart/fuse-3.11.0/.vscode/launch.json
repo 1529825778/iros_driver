@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "cppdbg",
+            "request": "launch",
+            "name": "cpp:cuse.c",
+            "program": "${workspaceRoot}/example/cuse",
+            "cwd": ".",
+            "args": [
+                "-f",
+                "--name=/dev/my_dev2"
+            ]
+        }
+    ]
+}

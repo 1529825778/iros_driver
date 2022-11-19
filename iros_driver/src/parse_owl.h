@@ -16,5 +16,6 @@ typedef struct Regester_parm{
 
 }Regester_parm;
 void parse_owl(std::string file);
-void get_Capbility_id();
+int get_Capbility_Major_id();
+void register_Capbility(void* ca);
 #endif

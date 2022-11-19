@@ -7,8 +7,10 @@
 #include"Capbility.h"
 #include<set>
 #include<ctime>
+#include<time.h>
 #include "cuse_lowlevel.h"
 #include "fuse_opt.h"
+#include "thread_pool.h"
 
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -17,9 +19,8 @@
 #include <sys/types.h>
 #include <net/if.h>
 #include <netdb.h>
+#include "Asio_client.h"
 
-#include <boost/archive/binary_iarchive.hpp>
-#include <boost/archive/binary_oarchive.hpp>
 
 
 
@@ -56,6 +57,7 @@ using namespace std;
 #define HAS                          "has"
 
 #define ETH                          "Eth"
+#define ETH_NAME                     "网卡地址"
 #define IP                           "ip地址"
 #define SEND_PORT                    "发送端口"
 #define RECV_PORT                    "接收端口"
@@ -69,71 +71,55 @@ using namespace std;
 #define SERIAL_PATH                  "接口标识"
 #define BAUD_RATE                    "波特率"
 
-
-
-class B{
+using namespace std;
+/*定义结构体,用于存放非本地无人平台上的能力信息*/
+class Plateform_node{
     private:
-
-        friend class boost::serialization::access;
-        template<class Archive>
-
-        void serialize(Archive & ar,const unsigned int version){
-            ar & name;
-            ar & id;
-        };
-        int name;
-        int id;
-
+        int major;
+        struct timeval tv;
+        vector<Capbility*>* list;
     public:
-        B(){}
-        B(int name,int id){
-            this->name = name;
-            this->id = id;
+        Plateform_node(){
+            this->list=new vector<Capbility*>();
         }
-        int getName(){
-            return this->name;
-        };
-        int getId(){
-            return this->id;
-        };
+        ~Plateform_node(){
+            delete this->list;
+        }
+        void setMajor(int major){
+            this->major = major;
+        }
+        int getMajor(){
+            return this->major;
+        }
+        vector<Capbility*>* getList(){
+            return this->list;
+
+        }
+        void setTime(struct timeval tv){
+            this->tv=tv;
+        }
+        /*判断是否未过期*/
+        bool isFresh(){
+            struct timeval now;
+            gettimeofday(&now,NULL);
+            if(now.tv_sec-tv.tv_sec>10){
+                return false;
+            }
+            return true;
+
+        }
+    
+
+
+
 };
 
-class A{
-    private:
-
-        friend class boost::serialization::access;
-        template<class Archive>
-        void serialize(Archive & ar,const unsigned int version){
-            ar & name;
-            ar & id;
-            ar & b;
-        };
-       
-        string name;
-        string id;
-        B* b;
-
-        
 
 
-    public:
-        A(){}
-        A(string name,string id,B* b){
-            this->name = name;
-            this->id = id;
-            this ->b = b;
-        }
-        string getName(){
-            return this->name;
-        }
-        string getId(){
-            return this->id;
-        }
-        B* getB(){
-            return this->b;
-        }
 
-};
+
+
+
 
  
 
@@ -172,7 +158,10 @@ extern Driver_mng* driver_mng;
 extern Device_mng* device_mng;
 extern Threadpool* pool;
 extern Robot* global_robot;
-
+extern Asio_Client* global_client;
+extern  boost::asio::io_service* global_client_service;
+extern map<string,vector<Plateform_node*>*>* plateform_map;
+extern set<int>* major_set;
 
 
 

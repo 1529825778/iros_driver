@@ -17,11 +17,11 @@ Interface* Data::getInterface(){
     return this->interface;
 }
 
-void Data::setParamter(map<string,string> p_map){
+void Data::setParamter(map<string,string>* p_map){
     this->paramter_map = p_map;
 }
 
-map<string,string> Data::getParamter(){
+map<string,string>* Data::getParamter(){
     return this->paramter_map;
 }
 

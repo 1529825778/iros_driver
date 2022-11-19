@@ -2,6 +2,9 @@
 #define DATA_H
 #include <map>
 #include "Interface.h"
+#include <boost/serialization/map.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
 using namespace std;
 
 struct Data_Info{
@@ -14,15 +17,30 @@ struct Data_Info{
 
 class Data{
     private:
+            friend class boost::serialization::access;
+            template<class Archive>
+            void serialize(Archive & ar,const unsigned int version){
+            ar & data_length;
+            ar & data_type;
+            ar & data_describe;
+            ar & data_handle_lib;
+            ar & data_formate;
+            ar & interface;
+            ar & paramter_map;
+        };
         int data_length;
         string data_type;
         string data_describe;
         string data_handle_lib;
         string data_formate;
         Interface* interface;
-        map<string,string> paramter_map;
+        map<string,string>* paramter_map;
+
+
     public:
-        Data(){};
+        Data(){
+            paramter_map=nullptr;
+        };
         Data(Data_Info*);
         ~Data(){};
 
@@ -33,8 +51,8 @@ class Data{
         string getFormate();
         Interface* getInterface();
         void setInterface(Interface*);
-        map<string,string> getParamter();
-        void setParamter(map<string,string>);
+        map<string,string>* getParamter();
+        void setParamter(map<string,string>*);
         void setInfo(Data_Info*);
   
      

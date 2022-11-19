@@ -1,4 +1,4 @@
-
+#include <iostream>
 #include "thread_pool.h"
 /*线程池*/ 
  Threadpool::Threadpool(int min,int max,int queueSize){
@@ -77,15 +77,19 @@ int Threadpool::threadPoolDestroy(){
  * void* arg: 要加到任务中的函数指针的参数
  * */
 void Threadpool::threadPoolAdd(void(*func)(void*),void* arg){
+   
     pthread_mutex_lock(&this->mutexPool);
+     
     while(this->queueSize == this->queueCapacity && !this->shutdown){
         //因为任务队列满了，或者线程池需要销毁，阻塞生产者线程
         pthread_cond_wait(&this->notfull,&this->mutexPool);
     }
+    
     if(this->shutdown){
         pthread_mutex_unlock(&this->mutexPool);
         return;
     }
+   
     //添加任务
     this->TaskQ[this->queueEnd].function = func;
     this->TaskQ[this->queueEnd].arg = arg;
